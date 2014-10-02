@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        div:nth-child(1) {
+            background-color: red;
+            float: left;
+            width: 50%;
+            height: 50%;
+        }
+        div:nth-child(2) {
+            background-color: green;
+            float: left;
+            width: 50%;
+            height: 50%;
+        }
+        div:nth-child(3) {
+            background-color: blue;
+            width: 100%;
+            height: 50%;
+            float: left;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function (event) {
+            var divs = document.getElementsByTagName('div');
+            console.log(divs);
+            for (var i = 0, len = divs.length; i < len; i++) {
+                divs[i].addEventListener('mouseenter', function (event) {
+                    console.log('You have entered ' + event.target.innerHTML);
+                    console.log('Came in from ' + event.relatedTarget.innerHTML);
+                });
+            }
+
+            //TODO: refactor the code to have only one event handler
+        });
+    </script>
+</head>
+<body>
+<div>
+    Part 1
+</div>
+<div>
+    Part 2
+</div>
+<div>
+    Part 3
+</div>
+</body>
+</html>

@@ -2,9 +2,65 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Capturing and Bubbling</title>
+    <style>
+        div {
+            margin: 1em;
+            padding: 1em;
+            border: 1px solid black;
+            /*background-color: #2a3a48;*/
+        }
+
+        div#list > div {
+            height: 100px;
+            width: 100px;
+            margin: 1em;
+            padding: 1em;
+
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM is parsed.');
+
+            document.body.firstElementChild.addEventListener('click', function (event) {
+                console.log('Click on the base div ancestor, phase = ' + event.eventPhase);
+
+            }, true);
+            document.body.firstElementChild.addEventListener('click', function (event) {
+                console.log('Click on the base div ancestor, phase = ' + event.eventPhase);
+            }, false);
+
+            document.body.firstElementChild.firstElementChild.firstElementChild.addEventListener('click', function (event) {
+                console.log('Click on the base div descendant, phase = ' + event.eventPhase);
+                event.stopPropagation();
+            }, true);
+
+
+            document.body.children[1].addEventListener('click', function (event) {
+                console.log(event.target.innerHTML);
+                console.log(event.currentTarget);
+            });
+
+            // TODO: what is the difference between stopPropagation() and stopImmediatePropagation()
+            // TODO: what does event.preventDefault() do?
+
+        });
+    </script>
 </head>
 <body>
+    <div data-id="ancestor">
+        <div data-id="parent">
+            <div data-id="descendant" id="descendant">
 
+            </div>
+        </div>
+    </div>
+
+    <div id="list">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
 </body>
 </html>
